@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block title %}New/Edit Note{% endblock %} {% block
+content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">
+          {% if form.content.data %} Edit Note {% else %} New Note {% endif %}
+        </h3>
+      </div>
+      <div class="card-body">
+        <form
+          method="post"
+          action="{% if note_id %}{{ url_for('main.edit_note', id=note_id) }}{% else %}{{ url_for('main.new_note') }}{% endif %}"
+        >
+          {{ form.hidden_tag() }}
+          <div class="form-group">
+            {{ form.title.label(class="form-control-label") }} {{
+            form.title(class="form-control") }} {% for error in
+            form.title.errors %}
+            <span class="text-danger">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <div class="form-group">
+            {{ form.content.label(class="form-control-label") }} {{
+            form.content(class="form-control", rows=10) }} {% for error in
+            form.content.errors %}
+            <span class="text-danger">[{{ error }}]</span>
+            {% endfor %}
+          </div>
+          <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

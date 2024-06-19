@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Dashboard{% endblock %} {% block
+content %}
+<h1>Welcome to the notes app 👋</h1>
+{% if current_user.is_authenticated %}
+<div class="container mt-4 d-flex justify-content-center">
+  <a href="{{ url_for('main.dashboard') }}">Go to dashboard</a>
+</div>
+{% else %}
+<div class="container mt-4 d-flex justify-content-center">
+  <a href="{{ url_for('main.login') }}">Please login first</a>
+</div>
+{% endif %} {% endblock %}
